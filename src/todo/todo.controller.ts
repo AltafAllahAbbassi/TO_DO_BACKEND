@@ -1,4 +1,6 @@
 import { Body, Controller, Get, NotFoundException, Param, Post ,Delete, Put} from '@nestjs/common';
+import { CreateTodoDto } from './dto/create-todo-dto';
+import { UpdateTodoDto } from './dto/update-todo-dto';
 import { Todo } from './models/todo';
 
 @Controller('todo')
@@ -35,7 +37,7 @@ export class TodoController {
 
     @Post()
     addTodo(
-        @Body() newTodo:Partial<Todo>
+        @Body() newTodo:CreateTodoDto
     ){
         const {name ,description}= newTodo
         const todo = new Todo()
@@ -61,7 +63,7 @@ export class TodoController {
     @Put(':id')
     updateTodo(
         @Param('id') id:string,
-         @Body() newTodo:Partial<Todo>
+         @Body() newTodo:UpdateTodoDto
     ){
 
         const {name, description,status}=newTodo
